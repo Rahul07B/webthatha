@@ -5,14 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Green Cross Remedies</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
-        /* Base Styles */
+        /* Base Styles with Modern Variables */
         :root {
             --primary: #008BC9;
+            --primary-light: #e6f3f9;
             --secondary: #2C3E50;
             --text: #333;
             --light: #f8f9fa;
-            --transition: all 0.3s ease;
+            --gradient: linear-gradient(135deg, var(--primary), #005a82);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
         }
 
         * {
@@ -24,9 +29,10 @@
 
         body {
             background: var(--light);
+            overflow-x: hidden;
         }
 
-        /* Header Styles */
+        /* Enhanced Header Styles */
         .header {
             position: fixed;
             top: 0;
@@ -38,62 +44,48 @@
         }
 
         .header.scrolled {
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-lg);
         }
 
         .top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 5%;
-            height: 50px;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-        }
-
-        /* Adjusted Logo Styles */
-        .logo {
-            height: 80px;
-            display: flex;
-            align-items: center;
-            transition: var(--transition);
-        }
-
-        .logo img {
-            height: 50%;
-            width: auto;
-            object-fit: contain;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .top-contact {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
+            padding: 0.5rem 5%;
+            background: var(--gradient);
+            color: white;
         }
 
         .contact-link {
+            color: white;
+            text-decoration: none;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            color: var(--text);
-            text-decoration: none;
             transition: var(--transition);
         }
 
         .contact-link:hover {
-            color: var(--primary);
             transform: translateY(-2px);
+            opacity: 0.9;
         }
 
-        /* Navigation */
+        /* Modern Navigation with Mega Menu */
         .nav {
             padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: white;
+        }
+
+        .logo {
+            height: 60px;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .nav-links {
@@ -111,20 +103,27 @@
             text-decoration: none;
             font-weight: 500;
             padding: 0.5rem 1rem;
+            border-radius: 8px;
             transition: var(--transition);
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
+        .nav-link:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        /* Enhanced Dropdown Menus */
         .dropdown {
             position: absolute;
             top: 100%;
             left: 0;
             background: white;
             min-width: 250px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-radius: 8px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
             opacity: 0;
             visibility: hidden;
             transform: translateY(10px);
@@ -140,7 +139,9 @@
         }
 
         .dropdown-link {
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             padding: 0.8rem 1.5rem;
             color: var(--text);
             text-decoration: none;
@@ -148,12 +149,18 @@
             font-size: 0.95rem;
         }
 
+        .dropdown-link i {
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+
         .dropdown-link:hover {
-            background: rgba(0,139,201,0.1);
+            background: var(--primary-light);
             color: var(--primary);
             padding-left: 2rem;
         }
 
+        /* Mega Dropdown */
         .mega-dropdown {
             position: absolute;
             top: 100%;
@@ -164,8 +171,8 @@
             gap: 2rem;
             background: white;
             padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
             opacity: 0;
             visibility: hidden;
             transition: var(--transition);
@@ -183,28 +190,31 @@
             color: var(--primary);
             margin-bottom: 1rem;
             font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 0.5rem;
         }
 
-        .mega-dropdown-link {
-            display: block;
-            padding: 0.5rem 0;
-            color: var(--text);
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: 0.95rem;
+        .mega-dropdown-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--primary);
         }
 
-        .mega-dropdown-link:hover {
-            color: var(--primary);
-            padding-left: 0.5rem;
-        }
-
-        /* Hero Section */
+        /* Enhanced Hero Section */
         .hero {
             height: 100vh;
             position: relative;
+            margin-top: 100px;
             overflow: hidden;
-            margin-top: 120px;
+        }
+
+        .hero-slides {
+            height: 100%;
+            position: relative;
         }
 
         .hero-slide {
@@ -235,100 +245,252 @@
             transform: translate(-50%, -50%);
             text-align: center;
             color: white;
-            width: 80%;
+            width: 90%;
             max-width: 800px;
-            opacity: 0;
-            animation: fadeUp 1s ease forwards;
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translate(-50%, -30%);
-            }
-            to {
-                opacity: 1;
-                transform: translate(-50%, -50%);
-            }
         }
 
         .hero-title {
-            font-size: 3.5rem;
+            font-size: clamp(2rem, 5vw, 3.5rem);
             margin-bottom: 1rem;
-            font-weight: 700;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUpIn 1s forwards;
         }
 
         .hero-description {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUpIn 1s 0.3s forwards;
         }
 
-        .hero-button {
-            padding: 1rem 2rem;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            cursor: pointer;
+        /* New Sections */
+        .stats-section {
+            padding: 3rem 5%;
+            background: white;
+            transform: translateY(-50px);
+            margin-bottom: -50px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
             transition: var(--transition);
         }
 
-        .hero-button:hover {
-            background: var(--secondary);
-            transform: translateY(-3px);
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
 
-        /* Features Section */
-        .features {
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Products Showcase */
+        .products-showcase {
             padding: 5rem 5%;
+            background: var(--light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--gradient);
+        }
+
+        .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
             background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-content {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        /* Research Section */
+        .research-section {
+            padding: 5rem 5%;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .research-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .research-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .research-image img {
+            width: 100%;
+            height: auto;
+            transition: var(--transition);
+        }
+
+        .research-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Enhanced Features Section */
+        .features {
+            padding: 5rem 5%;
+            background: var(--light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .feature-card {
-            padding: 2rem;
-            border-radius: 10px;
             background: white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transform-origin: left;
             transition: var(--transition);
         }
 
         .feature-card:hover {
             transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
         }
 
         .feature-icon {
             font-size: 2.5rem;
-            color: var(--primary);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            color: transparent;
             margin-bottom: 1rem;
         }
 
-        /* Footer */
+        /* Enhanced Footer */
         .footer {
             background: var(--secondary);
             color: white;
             padding: 4rem 5% 2rem;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
         }
 
         .footer-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-bottom: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .footer-section h3 {
             margin-bottom: 1.5rem;
             position: relative;
+            padding-bottom: 0.5rem;
         }
 
         .footer-section h3::after {
             content: '';
             position: absolute;
-            bottom: -0.5rem;
+            bottom: 0;
             left: 0;
             width: 50px;
             height: 2px;
@@ -347,6 +509,9 @@
             color: #ddd;
             text-decoration: none;
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .footer-link a:hover {
@@ -354,199 +519,440 @@
             padding-left: 0.5rem;
         }
 
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
         }
 
-        /* Responsive Design */
-        @media (max-width: 1024px) {
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            color: white;
+            display: flex;
+        align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        @keyframes fadeUpIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        /* Mobile Menu Enhancements */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 2000;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu-content {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background: white;
+            padding: 2rem;
+            transition: var(--transition);
+            overflow-y: auto;
+        }
+
+        .mobile-menu-overlay.active .mobile-menu-content {
+            right: 0;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+            transition: var(--transition);
+        }
+
+        .mobile-menu-close:hover {
+            color: var(--primary);
+            transform: rotate(90deg);
+        }
+
+        .mobile-nav-links {
+            margin-top: 2rem;
+        }
+
+        .mobile-nav-item {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-link:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .mobile-dropdown {
+            display: none;
+            padding: 0.5rem 1rem;
+        }
+
+        .mobile-dropdown.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        /* Enhanced Responsive Design */
+        @media (max-width: 1200px) {
             .mega-dropdown {
                 width: 95vw;
-                grid-template-columns: 1fr;
-                left: 0;
-                transform: translateX(0) translateY(10px);
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .nav-item:hover .mega-dropdown {
-                transform: translateX(0) translateY(0);
+            .research-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .nav-links {
                 display: none;
             }
 
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .top-contact {
-                display: none;
-            }
-
-            .mobile-menu-btn {
+            .mobile-menu {
                 display: block;
+                font-size: 1.5rem;
+                cursor: pointer;
+                color: var(--text);
+            }
+
+            .hero-content {
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mobile-menu-content {
+                width: 100%;
             }
         }
     </style>
 </head>
-<body>
-    <header class="header">
-        <div class="top-bar">
-            <div class="logo">
-                <img src="2.jpeg" alt="Green Cross Remedies">
+<body><header class="header">
+    <div class="top-bar">
+        <div class="logo">
+            <img src="2.jpeg" alt="Green Cross Remedies">
+        </div>
+        <div class="top-contact">
+            <a href="tel:+91-9833213611" class="contact-link">
+                <i class="fas fa-phone"></i>
+                +91-98332 13611
+            </a>
+            <a href="mailto:serao@humphrymedico.com" class="contact-link">
+                <i class="fas fa-envelope"></i>
+                serao@humphrymedico.com
+            </a>
+        </div>
+    </div>
+    <nav class="nav">
+        <div class="nav-links">
+            <div class="nav-item">
+                <a href="#" class="nav-link">
+                    Home
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-link">Company Overview</a>
+                    <a href="#" class="dropdown-link">Our Mission</a>
+                    <a href="#" class="dropdown-link">Vision & Values</a>
+                    <a href="#" class="dropdown-link">Management Team</a>
+                    <a href="#" class="dropdown-link">News & Updates</a>
+                </div>
             </div>
-            <div class="top-contact">
-                <a href="tel:+91-9833213611" class="contact-link">
-                    <i class="fas fa-phone"></i>
-                    +91-98332 13611
+
+            <div class="nav-item">
+                <a href="#" class="nav-link">
+                    Products
+                    <i class="fas fa-chevron-down"></i>
                 </a>
-                <a href="mailto:serao@humphrymedico.com" class="contact-link">
-                    <i class="fas fa-envelope"></i>
-                    serao@humphrymedico.com
+                <div class="mega-dropdown">
+                    <div class="mega-dropdown-section">
+                        <h3>Prescription Medicines</h3>
+                        <a href="#" class="mega-dropdown-link">Antibiotics</a>
+                        <a href="#" class="mega-dropdown-link">Cardiovascular</a>
+                        <a href="#" class="mega-dropdown-link">Diabetes Care</a>
+                        <a href="#" class="mega-dropdown-link">Pain Management</a>
+                        <a href="#" class="mega-dropdown-link">Respiratory Care</a>
+                    </div>
+                    <div class="mega-dropdown-section">
+                        <h3>OTC Products</h3>
+                        <a href="#" class="mega-dropdown-link">Vitamins & Supplements</a>
+                        <a href="#" class="mega-dropdown-link">Pain Relief</a>
+                        <a href="#" class="mega-dropdown-link">Cold & Flu</a>
+                        <a href="#" class="mega-dropdown-link">Digestive Health</a>
+                        <a href="#" class="mega-dropdown-link">First Aid</a>
+                    </div>
+                    <div class="mega-dropdown-section">
+                        <h3>Specialty Products</h3>
+                        <a href="#" class="mega-dropdown-link">Oncology</a>
+                        <a href="#" class="mega-dropdown-link">Immunology</a>
+                        <a href="#" class="mega-dropdown-link">Rare Diseases</a>
+                        <a href="#" class="mega-dropdown-link">Biologics</a>
+                        <a href="#" class="mega-dropdown-link">Custom Solutions</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-item">
+                <a href="#" class="nav-link">
+                    Research
+                    <i class="fas fa-chevron-down"></i>
                 </a>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-link">R&D Pipeline</a>
+                    <a href="#" class="dropdown-link">Clinical Trials</a>
+                    <a href="#" class="dropdown-link">Innovation Hub</a>
+                    <a href="#" class="dropdown-link">Publications</a>
+                    <a href="#" class="dropdown-link">Research Partnerships</a>
+                </div>
+            </div>
+
+            <div class="nav-item">
+                <a href="#" class="nav-link">
+                    Facilities
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-link">Manufacturing Units</a>
+                    <a href="#" class="dropdown-link">Quality Control</a>
+                    <a href="#" class="dropdown-link">R&D Centers</a>
+                    <a href="#" class="dropdown-link">Distribution Network</a>
+                    <a href="#" class="dropdown-link">Global Presence</a>
+                </div>
+            </div>
+
+            <div class="nav-item">
+                <a href="#" class="nav-link">
+                    Careers
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-link">Current Openings</a>
+                    <a href="#" class="dropdown-link">Life at Green Cross</a>
+                    <a href="#" class="dropdown-link">Benefits & Culture</a>
+                    <a href="#" class="dropdown-link">Learning & Development</a>
+                    <a href="#" class="dropdown-link">Apply Now</a>
+                </div>
+            </div>
+
+            <div class="nav-item">
+                <a href="#" class="nav-link">
+                    Contact
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-link">General Inquiries</a>
+                    <a href="#" class="dropdown-link">Business Development</a>
+                    <a href="#" class="dropdown-link">Media Relations</a>
+                    <a href="#" class="dropdown-link">Global Offices</a>
+                    <a href="#" class="dropdown-link">Support</a>
+                </div>
             </div>
         </div>
-        <nav class="nav">
-            <div class="nav-links">
-                <div class="nav-item">
-                    <a href="#" class="nav-link">
-                        Home
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <div class="dropdown">
-                        <a href="#" class="dropdown-link">Company Overview</a>
-                        <a href="#" class="dropdown-link">Our Mission</a>
-                        <a href="#" class="dropdown-link">Vision & Values</a>
-                        <a href="#" class="dropdown-link">Management Team</a>
-                        <a href="#" class="dropdown-link">News & Updates</a>
-                    </div>
-                </div>
+    </nav>
+</header>
 
-                <div class="nav-item">
-                    <a href="#" class="nav-link">
-                        Products
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <div class="mega-dropdown">
-                        <div class="mega-dropdown-section">
-                            <h3>Prescription Medicines</h3>
-                            <a href="#" class="mega-dropdown-link">Antibiotics</a>
-                            <a href="#" class="mega-dropdown-link">Cardiovascular</a>
-                            <a href="#" class="mega-dropdown-link">Diabetes Care</a>
-                            <a href="#" class="mega-dropdown-link">Pain Management</a>
-                            <a href="#" class="mega-dropdown-link">Respiratory Care</a>
-                        </div>
-                        <div class="mega-dropdown-section">
-                            <h3>OTC Products</h3>
-                            <a href="#" class="mega-dropdown-link">Vitamins & Supplements</a>
-                            <a href="#" class="mega-dropdown-link">Pain Relief</a>
-                            <a href="#" class="mega-dropdown-link">Cold & Flu</a>
-                            <a href="#" class="mega-dropdown-link">Digestive Health</a>
-                            <a href="#" class="mega-dropdown-link">First Aid</a>
-                        </div>
-                        <div class="mega-dropdown-section">
-                            <h3>Specialty Products</h3>
-                            <a href="#" class="mega-dropdown-link">Oncology</a>
-                            <a href="#" class="mega-dropdown-link">Immunology</a>
-                            <a href="#" class="mega-dropdown-link">Rare Diseases</a>
-                            <a href="#" class="mega-dropdown-link">Biologics</a>
-                            <a href="#" class="mega-dropdown-link">Custom Solutions</a>
-                        </div>
-                    </div>
-                </div>
+<section class="hero">
+    <div class="hero-slide active">
+        <img src="3.jpg" alt="Modern Facility" class="hero-image">
+        <div class="hero-content">
+            <h1 class="hero-title">Advancing Healthcare Through Innovation</h1>
+            <p class="hero-description">Leading the way in pharmaceutical excellence with over 500+ formulations</p>
+            <button class="hero-button">Discover More</button>
+        </div>
+    </div>
+</section>
+    <!-- Previous header, nav, and hero sections remain the same -->
 
-                <div class="nav-item">
-                    <a href="#" class="nav-link">
-                        Research
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <div class="dropdown">
-                        <a href="#" class="dropdown-link">R&D Pipeline</a>
-                        <a href="#" class="dropdown-link">Clinical Trials</a>
-                        <a href="#" class="dropdown-link">Innovation Hub</a>
-                        <a href="#" class="dropdown-link">Publications</a>
-                        <a href="#" class="dropdown-link">Research Partnerships</a>
-                    </div>
-                </div>
-
-                <div class="nav-item">
-                    <a href="#" class="nav-link">
-                        Facilities
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <div class="dropdown">
-                        <a href="#" class="dropdown-link">Manufacturing Units</a>
-                        <a href="#" class="dropdown-link">Quality Control</a>
-                        <a href="#" class="dropdown-link">R&D Centers</a>
-                        <a href="#" class="dropdown-link">Distribution Network</a>
-                        <a href="#" class="dropdown-link">Global Presence</a>
-                    </div>
-                </div>
-
-                <div class="nav-item">
-                    <a href="#" class="nav-link">
-                        Careers
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <div class="dropdown">
-                        <a href="#" class="dropdown-link">Current Openings</a>
-                        <a href="#" class="dropdown-link">Life at Green Cross</a>
-                        <a href="#" class="dropdown-link">Benefits & Culture</a>
-                        <a href="#" class="dropdown-link">Learning & Development</a>
-                        <a href="#" class="dropdown-link">Apply Now</a>
-                    </div>
-                </div>
-
-                <div class="nav-item">
-                    <a href="#" class="nav-link">
-                        Contact
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <div class="dropdown">
-                        <a href="#" class="dropdown-link">General Inquiries</a>
-                        <a href="#" class="dropdown-link">Business Development</a>
-                        <a href="#" class="dropdown-link">Media Relations</a>
-                        <a href="#" class="dropdown-link">Global Offices</a>
-                        <a href="#" class="dropdown-link">Support</a>
-                    </div>
-                </div>
+    <!-- New Stats Section -->
+    <section class="stats-section" data-aos="fade-up">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" data-count="500">0</div>
+                <p>Product Formulations</p>
             </div>
-        </nav>
-    </header>
-
-    <section class="hero">
-        <div class="hero-slide active">
-            <img src="3.jpg" alt="Modern Facility" class="hero-image">
-            <div class="hero-content">
-                <h1 class="hero-title">Advancing Healthcare Through Innovation</h1>
-                <p class="hero-description">Leading the way in pharmaceutical excellence with over 500+ formulations</p>
-                <button class="hero-button">Discover More</button>
+            <div class="stat-card">
+                <div class="stat-number" data-count="50">0</div>
+                <p>Countries Reached</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-count="20">0</div>
+                <p>Years of Excellence</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-count="1000">0</div>
+                <p>Healthcare Professionals</p>
             </div>
         </div>
     </section>
 
-    <section class="features">
-        <div class="feature-card">
-            <i class="fas fa-flask feature-icon"></i>
-            <h3>Research & Development</h3>
-            <p>State-of-the-art facilities dedicated to developing innovative pharmaceutical solutions.</p>
-        </div>
-        <div class="feature-card">
-            <i class="fas fa-certificate feature-icon"></i>
-            <h3>Quality Assurance</h3>
-            <p>Rigorous testing and quality control measures to ensure product excellence.</p>
-        </div>
-        <div class="feature-card">
-            <i class="fas fa-globe feature-icon"></i>
-            <h3>Global Reach</h3>
-            <p>Serving healthcare needs across multiple countries with trusted pharmaceuticals.</p>
+    <!-- Products Showcase -->
+    <section class="products-showcase">
+        <h2 class="section-title" data-aos="fade-up">Featured Products</h2>
+        <div class="products-grid">
+            <div class="product-card" data-aos="fade-up">
+                <img src="/api/placeholder/400/300" alt="Product 1" class="product-image">
+                <div class="product-content">
+                    <h3 class="product-title">Cardiovascular Care</h3>
+                    <p>Advanced solutions for heart health management.</p>
+                </div>
+            </div>
+            <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                <img src="/api/placeholder/400/300" alt="Product 2" class="product-image">
+                <div class="product-content">
+                    <h3 class="product-title">Diabetes Management</h3>
+                    <p>Comprehensive diabetes care solutions.</p>
+                </div>
+            </div>
+            <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                <img src="/api/placeholder/400/300" alt="Product 3" class="product-image">
+                <div class="product-content">
+                    <h3 class="product-title">Respiratory Health</h3>
+                    <p>Innovative respiratory care products.</p>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- Research Section -->
+    <section class="research-section">
+        <div class="research-grid">
+            <div class="research-content" data-aos="fade-right">
+                <h2 class="section-title">Research & Innovation</h2>
+                <p>Our state-of-the-art research facilities are dedicated to developing breakthrough pharmaceutical solutions.</p>
+                <ul class="research-list">
+                    <li>Advanced Clinical Trials</li>
+                    <li>Modern Laboratory Equipment</li>
+                    <li>Expert Research Team</li>
+                    <li>Global Research Network</li>
+                </ul>
+            </div>
+            <div class="research-image" data-aos="fade-left">
+                <img src="/api/placeholder/600/400" alt="Research Facility">
+            </div>
+        </div>
+    </section>
     <footer class="footer">
         <div class="footer-grid">
             <div class="footer-section">
@@ -576,39 +982,108 @@
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
         // Header scroll effect
         window.addEventListener('scroll', () => {
             const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
+            const backToTop = document.querySelector('.back-to-top');
+            
+            if (window.scrollY > 50) {
                 header.classList.add('scrolled');
+                backToTop.classList.add('visible');
             } else {
                 header.classList.remove('scrolled');
+                backToTop.classList.remove('visible');
             }
         });
 
-        // Animate elements on scroll
-        const observerOptions = {
-            threshold: 0.1
-        };
+        // Stats Counter Animation
+        const stats = document.querySelectorAll('.stat-number');
+        
+        function animateStats() {
+            stats.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-count'));
+                const duration = 2000;
+                const increment = target / (duration / 16);
+                let current = 0;
+
+                const updateCount = () => {
+                    current += increment;
+                    stat.textContent = Math.round(current);
+
+                    if (current < target) {
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        stat.textContent = target;
+                    }
+                };
+
+                updateCount();
+            });
+        }
+
+        // Intersection Observer for Stats
+        const statsSection = document.querySelector('.stats-section');
+        let hasAnimated = false;
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
+                if (entry.isIntersecting && !hasAnimated) {
+                    animateStats();
+                    hasAnimated = true;
                 }
             });
-        }, observerOptions);
-
-        document.querySelectorAll('.feature-card, .footer-section').forEach(el => {
-            observer.observe(el);
         });
 
-        // Mobile menu handling
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('touchstart', function(e) {
-                this.classList.toggle('hover');
-                e.preventDefault();
+        observer.observe(statsSection);
+
+        // Mobile Menu
+        const mobileMenuBtn = document.querySelector('.mobile-menu');
+        const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+        const mobileMenuClose = document.querySelector('.mobile-menu-close');
+        const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        mobileNavItems.forEach(item => {
+            const link = item.querySelector('.mobile-nav-link');
+            const dropdown = item.querySelector('.mobile-dropdown');
+
+            if (dropdown) {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                });
+            }
+        });
+
+        // Back to Top
+        document.querySelector('.back-to-top').addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
         });
     </script>
